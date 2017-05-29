@@ -1,0 +1,32 @@
+package eu.mihosoft.vrl.user;
+import edu.gcsc.vrl.jfreechart.TrajectoryPlotter;
+import org.jfree.chart.JFreeChart;
+import eu.mihosoft.vrl.math.*;
+import eu.mihosoft.vrl.math.Function1D;
+import eu.mihosoft.vrl.math.Trajectory;
+
+
+      //class TrajectoryTangent, which plots both the function.
+
+
+@ComponentInfo(name="Trajectory", category="Custom")
+public class TrajectoryTangent implements java.io.Serializable {
+  private static final long serialVersionUID=1L;
+
+  // plotter object
+  private transient TrajectoryPlotter plotter;
+  
+  public JFreeChart tangentLine(
+    Trajectory t,
+    Trajectory tangentLine) {
+
+     // initialize plotter object
+      if(plotter==null) {
+       plotter = new TrajectoryPlotter();
+     }
+
+
+     // plot both trajectories
+     return plotter.lineChart(t,tangentLine);
+  }
+}
