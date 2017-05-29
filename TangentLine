@@ -2,6 +2,9 @@ package eu.mihosoft.vrl.user;
 import eu.mihosoft.vrl.math.*;
 import eu.mihosoft.vrl.math.Function1D;
 import eu.mihosoft.vrl.math.Trajectory;
+
+       //Class FunctionEvaluator
+       
 @ComponentInfo(name="FunctionEvaluator", category="Exercise 0")
 public class FunctionEvaluator implements java.io.Serializable{
     private static final long serialVersionUID=1L;
