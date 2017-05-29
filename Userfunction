@@ -1,0 +1,41 @@
+package eu.mihosoft.vrl.user;
+import eu.mihosoft.vrl.math.*;
+
+
+      //Class UserFunction, tangentline method only works for 1D Function.
+
+
+@ComponentInfo(name = "User Function", category = "VRL/Math",
+        description="Evaluates expressions (e.g. x*x+y*y)")
+@ObjectInfo(name = "User Function")
+public class UserFunction implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    public Function1D getFunction1D(
+            @ParamInfo(name = "f(t) = ",
+            options = "xVarName=\"t\"") GroovyFunction1D f) {
+
+
+        // we return the user defined function
+        return f;
+    }
+    
+    public Function2D getFunction2D(
+            @ParamInfo(name = "f(x,y) = ",
+            options = "xVarName=\"x\";yVarName=\"y\"") GroovyFunction2D f) {
+
+
+        // we return the user defined function
+        return f;
+    }
+    
+    public Function3D getFunction3D(
+            @ParamInfo(name = "f(x,y,z) = ",
+            options = "xVarName=\"x\";yVarName=\"y\";zVarName=\"z\"") GroovyFunction3D f) {
+
+
+        // we return the user defined function
+        return f;
+    }
+}
