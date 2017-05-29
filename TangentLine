@@ -1,0 +1,49 @@
+package eu.mihosoft.vrl.user;
+import eu.mihosoft.vrl.math.*;
+import eu.mihosoft.vrl.math.Function1D;
+import eu.mihosoft.vrl.math.Trajectory;
+@ComponentInfo(name="FunctionEvaluator", category="Exercise 0")
+public class FunctionEvaluator implements java.io.Serializable{
+    private static final long serialVersionUID=1L;
+    
+     @MethodInfo(name="", valueName="Trajectory", 
+      valueStyle="default", valueOptions="", hide=false)
+    public Trajectory evaluate(
+        @ParamInfo(name="function 1d", style="default", options="")   Function1D f,
+        @ParamInfo(name="Label", style="default", options="value=\"Label\"") String label,
+        @ParamInfo(name="t_0", style="default", options="value=0.0D") double t_0,
+        @ParamInfo(name="t_n", style="default", options="value=10.0D") double t_n,
+        @ParamInfo(name="dt" , style="default", options="value=0.1D") double dt
+        ){
+
+        Trajectory trajectory = new Trajectory(label);
+
+       int n = t_n/dt;    
+        for (int i=t_0; i<n; i++) {
+            double ti = i*dt;
+            trajectory.add(ti,f.run(ti));
+            }
+        return trajectory;
+        }
+
+   public Trajectory tangent (@ParamInfo(name="function 1d*", style="default", options="")Function1D f1,
+    @ParamInfo(name="Label", style="Tangent", options="value=\"Label\"") String label2,
+     @ParamInfo(name="t_0", style="default", options="value=0.0D") double t_0,
+        @ParamInfo(name="t_n", style="default", options="value=10.0D") double t_n,
+        @ParamInfo(name="dt" , style="default", options="value=0.1D") double dt,
+                     @ParamInfo(name="pos", style="slider",  options="min=0;max=10;invokeOnChange=true") int pos1){
+    int slope = ((f1.run(pos1) - f1.run(pos1 - 0.01))/0.01);      // this slope is calculated by approximation approach.
+    int constant = f1.run(pos1) - slope*pos1;     // this is the constant part of the equation of the tangent, that is y = mx + constant.
+
+    Trajectory tangentline = new Trajectory("tangentline");
+    
+    int n = t_n/dt;    
+        for (int i=t_0; i<n; i++) {
+            double ti = i*dt;
+            tangentline.add(ti,slope*ti+constant);
+            }
+             return tangentline;
+    
+    }
+
+}
