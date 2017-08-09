@@ -1,10 +1,4 @@
 package eu.mihosoft.vrl.user;
-import eu.mihosoft.vrl.math.*;
-import eu.mihosoft.vrl.math.Function1D;
-import eu.mihosoft.vrl.math.Trajectory;
-
-       //Class FunctionEvaluator
-       
 @ComponentInfo(name="FunctionEvaluator", category="Exercise 0")
 public class FunctionEvaluator implements java.io.Serializable{
     private static final long serialVersionUID=1L;
@@ -34,10 +28,11 @@ public class FunctionEvaluator implements java.io.Serializable{
      @ParamInfo(name="t_0", style="default", options="value=0.0D") double t_0,
         @ParamInfo(name="t_n", style="default", options="value=10.0D") double t_n,
         @ParamInfo(name="dt" , style="default", options="value=0.1D") double dt,
-        @ParamInfo(name="h" , style="slider", options="min = 1;max=10;invokeOnChange=true") int h,
+        @ParamInfo(name="h*0.001" , style="slider", options="min = 1;max=10;invokeOnChange=true") int h,
                      @ParamInfo(name="pos", style="slider",  options="min=0;max=10;invokeOnChange=true") int pos1){
-    int slope = ((f1.run(pos1+h*0.001) - f1.run(pos1))/h*0.001);  // this slope is calculated by approximation approach.
-    int constant = f1.run(pos1) - slope*pos1;     // this is the constant part of the equation of the tangent, that is y = mx + constant.
+    double new_h = (double)h*0.001
+    double slope = ((f1.run(pos1+new_h) - f1.run(pos1))/new_h);  // this slope is calculated by approximation approach.
+    double constant = f1.run(pos1) - slope*pos1;     // this is the constant part of the equation of the tangent, that is y = mx + constant.
 
     Trajectory tangentline = new Trajectory("tangentline");
     
@@ -47,7 +42,5 @@ public class FunctionEvaluator implements java.io.Serializable{
             tangentline.add(ti,slope*ti+constant);
             }
              return tangentline;
-    
     }
-
 }
